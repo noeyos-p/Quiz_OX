@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>수정화면</title>
+</head>
+<body>
+<h1>OX Quiz Application</h1>
+<h3>변경 폼</h3>
+<form th:action="@{/quiz/update}" method="post" th:object="${dto}">
+    <input type="hidden" th:field="*{id}">
+    <div>
+        <label for="updateQuestion">퀴즈 내용 :</label>
+        <br>
+        <textarea name="updateQuestion" rows="4" cols="40" th:field="*{question}"></textarea>
+        <input type="hidden" name="updateQuestion" th:value="*{question}">
+        <br>
+        <span th:errors="*{question}" style="font-size:10; color:red"></span>
+    </div>
+    <div>
+        <label for="answer">퀴즈 정답 :</label>
+        <br>
+        <input type="hidden" name="yes" th:value="*{yes}">
+        <input type="hidden" name="no" th:value="*{no}">
+        <label>
+            <input type="radio" name="answer" value="yes"
+                   th:checked="${dto.yes}"> O
+        </label>
+        <label>
+            <input type="radio" name="answer" value="no"
+                   th:checked="${dto.no}"> X
+        </label>
+    </div>
+
+    <div>
+        <label for="writer">수정자 :</label>
+        <br>
+        <input type="text" name="writer" th:field="*{writer}">
+        <br>
+        <span th:errors="*{writer}" style="font-size:10; color:red"></span>
+    </div>
+
+    <button type="submit">수정</button>
+
+</form>
+<a th:href="@{/quiz}">CRUD 화면으로 돌아가기</a>
+</body>
+</html>

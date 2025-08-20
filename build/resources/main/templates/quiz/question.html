@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>퀴즈 목록</title>
+</head>
+<body>
+    <h1>퀴즈 목록
+        <a th:href="@{/quiz/insert}">
+            <button type="button">추가하기</button>
+        </a>
+    </h1>
+    <a th:href="@{/}">CRUD 화면으로 돌아가기</a>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>질문</th>
+                <th>정답</th>
+                <th>작성자</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="quiz : ${list}">
+                <td th:text="${quiz.id}">1</td>
+                <td th:text="${quiz.question}">문제 내용</td>
+                <td style="display:flex; justify-content:center;">
+                    <span th:if="${quiz.yes}" th:text="'O'"></span>
+                    <span th:if="${quiz.no}" th:text="'X'"></span>
+                </td>
+                <td th:text="${quiz.writer}">작성자</td>
+                <td>
+                    <form th:action="@{/quiz/{id}(id=${quiz.id})}" method="get" style="display:inline">
+                        <button type="submit">수정</button>
+                    </form>
+
+                    <form th:action="@{/quiz/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${quiz.id}">
+                        <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+                    </form>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

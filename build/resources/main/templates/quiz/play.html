@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OX퀴즈 게임</title>
+</head>
+<body>
+<h1>OX 퀴즈 게임 : PLAY</h1>
+<h3>퀴즈</h3>
+<div>
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+    <p th:if="${dto != null}" th:text="${dto.question}"></p>
+</div>
+<div th:if="${dto != null}">
+    <form th:action="@{/quiz/check}" method="post">
+        <input type="hidden" name="id" th:value="${dto.id}" />
+        <button type="submit" name="answer" value="yes">O</button>
+        <button type="submit" name="answer" value="no">X</button>
+    </form>
+</div>
+<div th:if="${dto == null}"><a th:href="@{/}">CRUD 화면으로 돌아가기</a></div>
+</body>
+</html>

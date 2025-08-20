@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>전체 퀴즈 풀이 내역</title>
+</head>
+<body>
+<h1>전체 퀴즈 풀이 내역</h1>
+<a th:href="@{/}">CRUD 화면으로 돌아가기</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>유저</th>
+        <th>시간</th>
+        <th>결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${play == null or #lists.isEmpty(play)}">
+        <td colspan="4">데이터가 없습니다.</td>
+    </tr>
+    <tr th:each="p : ${play}">
+        <td th:text="${p.id}">1</td>
+        <td th:text="${p.user}">hong</td>
+        <td th:text="${#dates.format(p.date, 'yyyy-MM-dd HH:mm')}">2025-08-20 10:00</td>
+        <td th:text="${p.yes == '1' ? '정답' : '오답'}">정답</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OX 퀴즈 게임 : 정답</title>
+</head>
+<body>
+<h1>OX 퀴즈 게임 : PLAY</h1>
+<h3 th:text="${result}" style="color:red"></h3>
+
+<div>
+    <a th:href="@{/quiz/play}">리플레이</a>
+    <a th:href="@{/}">CRUD 화면으로 돌아가기</a>
+</div>
+</body>
+</html>

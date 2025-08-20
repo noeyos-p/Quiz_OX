@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:unless="${session.loginId}==null">
+    My Page  <span style="font-weight: bold;">[[${session.loginId}]]</span>
+</div>
+<ul>
+    <div th:if="${session.loginId}==null">
+        <li><a th:href="@{/user/login}">로그인</a></li>
+        <li><a th:href="@{/user/signup}">회원가입</a></li>
+    </div>
+    <div th:if="${session.loginId}!=null">
+        <li><a th:href="@{/user/logout}">로그아웃</a></li>
+        <div th:if="${user.status}==false">
+            <p style="color: red; font-weight: bold;">
+                현재 승인대기 중입니다.
+            </p>
+        </div>
+        <div th:if="${user.status}==true">
+            <li><a th:href="@{/quiz/play}">OX 퀴즈 바로가기</a></li>
+            <div th:if="${session.loginId}!='root'">
+            <li><a th:href="@{/user/info}">퀴즈 풀이 내역</a></li>
+            </div>
+        </div>
+        <div th:if="${session.loginId}=='root'">
+            <li><a th:href="@{/user/list}">사용자 목록</a></li>
+            <li><a th:href="@{/admin/info}">퀴즈 풀이 전체 내역</a></li>
+            <li><a th:href="@{/quiz}">질문 목록</a></li>
+        </div>
+    </div>
+</ul>
+</body>
+</html>
